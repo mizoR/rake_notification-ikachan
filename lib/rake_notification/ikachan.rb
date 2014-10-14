@@ -1,7 +1,10 @@
 require 'rake_notification/ikachan/version'
+require 'rake_notification'
 require 'socket'
 require 'ikachan'
 require 'active_support/core_ext/string/strip'
+
+using RakeNotification
 
 module RakeNotification
   module Ikachan
