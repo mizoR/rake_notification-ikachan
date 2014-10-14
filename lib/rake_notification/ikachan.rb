@@ -5,6 +5,18 @@ require 'active_support/core_ext/string/strip'
 
 module RakeNotification
   module Ikachan
+    def self.url=(url)
+      ::Ikachan.url = url
+    end
+
+    def self.channel=(channel)
+      ::Ikachan.channel = channel
+    end
+
+    def self.new
+      RakeNotifier.new
+    end
+
     class RakeNotifier
       START_LABEL   = "\x02\x0307[START]\x0f"
       SUCCESS_LABEL = "\x02\x0303[SUCCESS]\x0f"
@@ -25,14 +37,10 @@ module RakeNotification
         EOS
       end
 
-      def self.ikachan
-        ::Ikachan
-      end
-
       private
 
       def notice(msg)
-        msg.each_line {|m| self.ikachan.notice m }
+        msg.each_line {|m| ::Ikachan.notice m }
       end
 
       def hostname
